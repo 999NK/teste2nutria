@@ -1,15 +1,33 @@
 # NutrIA - Nutrition Tracking Application
 
 ## Project Overview
-A comprehensive nutrition tracking mobile application called "NutrIA" for Brazilian users, featuring enhanced USDA food database integration with Portuguese-to-English translation, manual meal tracking with Brazilian units, automatic nutrient goal calculation, 5AM-5AM nutritional day cycle, mobile PWA functionality, AI-powered recipe generation capabilities, personalized recipe recommendations based on nutrition goals, and chatbot interface for enhanced user interaction.
+A comprehensive nutrition tracking mobile application called "NutrIA" for Brazilian users, featuring enhanced USDA food database integration with Portuguese-to-English translation, manual meal tracking with Brazilian units, automatic nutrient goal calculation, 5AM-5AM nutritional day cycle, React Native mobile functionality for iOS and Android deployment, AI-powered recipe generation capabilities, personalized recipe recommendations based on nutrition goals, and chatbot interface for enhanced user interaction.
 
 ## User Preferences
 - Language: Portuguese (Brazilian)
 - Communication: Direct and solution-focused
 - Interface: Mobile-first design with intuitive navigation
 - Features: AI-powered nutrition assistance and recipe generation
+- Platform: React Native for iOS and Android deployment
 
 ## Recent Changes
+**2025-07-04 20:10** 
+- ✓ Conversão completa da aplicação web para React Native
+- ✓ Estrutura completa de telas React Native criada:
+  - SplashScreen, LoginScreen, RegisterScreen com autenticação
+  - DashboardScreen com resumo nutricional e progresso diário
+  - MealsScreen para registro de refeições
+  - ProgressScreen com gráficos semanais e estatísticas
+  - MyPlanScreen para visualização de planos ativos e histórico
+  - AIAssistantScreen com chat personalizado e geração de planos
+  - ProfileScreen com configurações e metas do usuário
+  - OnboardingScreen com fluxo de configuração inicial
+- ✓ Contextos React Native implementados (AuthContext, ThemeContext)
+- ✓ Serviço de API adaptado para React Native com fetch
+- ✓ Navegação entre telas configurada no App.tsx
+- ✓ Design responsivo e tema escuro/claro mantidos
+- ✓ Backend Express mantido inalterado para compatibilidade
+- ✓ Arquitetura híbrida: React Native frontend + Express backend
 **2025-07-04 19:55**
 - ✓ Migração completa e bem-sucedida do Replit Agent para ambiente Replit
 - ✓ Aplicação NutrIA rodando estável na porta 5000 com Vite + Express
