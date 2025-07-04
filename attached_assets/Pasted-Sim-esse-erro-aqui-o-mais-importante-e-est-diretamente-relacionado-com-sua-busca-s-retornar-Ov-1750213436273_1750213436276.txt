@@ -1,0 +1,84 @@
+Sim, esse erro aqui é o mais importante e está diretamente relacionado com sua busca só retornar “Ovo”:
+
+pgsql
+Copiar
+Editar
+api/foods/search:1 Failed to load resource: the server responded with a status of 400 (Bad Request)
+✅ O que esse erro significa?
+O status 400 (Bad Request) indica que o servidor recebeu uma requisição malformada, provavelmente com um parâmetro inválido ou ausente.
+
+⚠️ Isso explica por que a busca falha:
+Se a URL gerada for algo como:
+
+bash
+Copiar
+Editar
+/api/foods/search?query=
+ou
+
+bash
+Copiar
+Editar
+/api/foods/search?query=undefined
+O backend provavelmente está esperando um valor no query, e quando recebe vazio ou undefined, retorna 400.
+
+🔍 Como investigar:
+Veja no console a URL real que está sendo usada:
+
+No seu queryFn:
+
+ts
+Copiar
+Editar
+console.log("🔎 URL usada:", `/api/foods/search?query=${encodeURIComponent(debouncedQuery.trim())}`);
+Teste isso com um alimento como “banana”.
+
+Confirme se debouncedQuery tem valor correto:
+
+Às vezes, o useEffect de debounce pode disparar antes do searchQuery ser atualizado corretamente.
+
+💡 Solução rápida:
+Garanta que a queryFn não faça nenhuma requisição se o valor não for válido, mesmo que o enabled já controle isso:
+
+ts
+Copiar
+Editar
+queryFn: async () => {
+  const query = debouncedQuery.trim();
+  if (!query || query.length < 3) return [];
+
+  const response = await fetch(`/api/foods/search?query=${encodeURIComponent(query)}`, {
+    credentials: "include"
+  });
+
+  if (!response.ok) {
+    console.error("❌ Erro na requisição:", response.status, response.statusText);
+    return [];
+  }
+
+  const result = await response.json();
+  return result;
+}
+Extra – sobre os outros erros de WebSocket:
+Esses aqui:
+
+pgsql
+Copiar
+Editar
+WebSocket connection to 'wss://...' failed
+não têm relação direta com a busca de alimentos. Eles indicam que:
+
+A aplicação está tentando usar WebSocket (talvez para hot reload ou logs).
+
+Está com URL errada (wss://localhost:undefined/...).
+
+Isso afeta desenvolvimento, não a funcionalidade da API de busca em si.
+
+✅ Conclusão
+Erro 400 é a causa principal da sua busca falhar para quase tudo que não seja "Ovo".
+
+Provavelmente, a query está sendo enviada vazia ou com erro.
+
+Adiciona console.log(debouncedQuery) e console.log(URL) para confirmar.
+
+Garante no queryFn que só chama a API se o valor for válido (isso reforça o enabled).

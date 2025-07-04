@@ -1,0 +1,94 @@
+{
+  "id": "nutria-nutrition-tracker",
+  "name": "NutrIA - Rastreamento Nutricional",
+  "short_name": "NutrIA",
+  "description": "App de rastreamento nutricional com IA para brasileiros",
+  "start_url": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "minimal-ui", "standalone", "fullscreen"],
+  "background_color": "#ffffff",
+  "theme_color": "#22c55e",
+  "orientation": "portrait",
+  "categories": ["health", "lifestyle", "medical"],
+  "lang": "pt-BR",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%2322c55e' rx='24'/%3E%3Cpath fill='white' d='M96 40c-8 0-14 6-14 14v20H62c-8 0-14 6-14 14s6 14 14 14h20v20c0 8 6 14 14 14s14-6 14-14v-20h20c8 0 14-6 14-14s-6-14-14-14h-20V54c0-8-6-14-14-14z'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%2322c55e' rx='64'/%3E%3Cpath fill='white' d='M256 106c-21 0-38 17-38 38v56h-56c-21 0-38 17-38 38s17 38 38 38h56v56c0 21 17 38 38 38s38-17 38-38v-56h56c21 0 38-17 38-38s-17-38-38-38h-56v-56c0-21-17-38-38-38z'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 144 144'%3E%3Crect width='144' height='144' fill='%2322c55e' rx='18'/%3E%3Cpath fill='white' d='M72 30c-6 0-11 5-11 11v15h-15c-6 0-11 5-11 11s5 11 11 11h15v15c0 6 5 11 11 11s11-5 11-11V78h15c6 0 11-5 11-11s-5-11-11-11H83V41c0-6-5-11-11-11z'/%3E%3C/svg%3E",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'%3E%3Crect width='540' height='720' fill='%23f9fafb'/%3E%3Crect x='20' y='60' width='500' height='80' fill='%2322c55e' rx='12'/%3E%3Ctext x='270' y='110' text-anchor='middle' fill='white' font-size='24' font-family='Arial'%3ENutrIA Dashboard%3C/text%3E%3Crect x='20' y='160' width='240' height='120' fill='white' rx='8' stroke='%23e5e7eb'/%3E%3Ctext x='140' y='190' text-anchor='middle' fill='%23374151' font-size='14'%3ECalorias%3C/text%3E%3Ctext x='140' y='240' text-anchor='middle' fill='%2322c55e' font-size='32'%3E1842%3C/text%3E%3Crect x='280' y='160' width='240' height='120' fill='white' rx='8' stroke='%23e5e7eb'/%3E%3Ctext x='400' y='190' text-anchor='middle' fill='%23374151' font-size='14'%3EProteínas%3C/text%3E%3Ctext x='400' y='240' text-anchor='middle' fill='%2322c55e' font-size='32'%3E98g%3C/text%3E%3C/svg%3E",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "Dashboard principal com métricas nutricionais"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 768'%3E%3Crect width='1024' height='768' fill='%23f9fafb'/%3E%3Crect x='40' y='40' width='944' height='688' fill='white' rx='16'/%3E%3Crect x='60' y='60' width='400' height='60' fill='%2322c55e' rx='8'/%3E%3Ctext x='260' y='95' text-anchor='middle' fill='white' font-size='20'%3ENutrIA - Rastreamento Nutricional%3C/text%3E%3Crect x='60' y='140' width='180' height='120' fill='%23f3f4f6' rx='8'/%3E%3Ctext x='150' y='170' text-anchor='middle' fill='%23374151' font-size='14'%3ECalorias Diárias%3C/text%3E%3Ctext x='150' y='220' text-anchor='middle' fill='%2322c55e' font-size='28'%3E2100%3C/text%3E%3C/svg%3E",
+      "sizes": "1024x768",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "Interface desktop do NutrIA"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Adicionar Refeição",
+      "short_name": "Nova Refeição",
+      "description": "Adicionar uma nova refeição rapidamente",
+      "url": "/add-meal",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%2322c55e' rx='12'/%3E%3Cpath fill='white' d='M48 20c-4 0-7 3-7 7v14H27c-4 0-7 3-7 7s3 7 7 7h14v14c0 4 3 7 7 7s7-3 7-7V55h14c4 0 7-3 7-7s-3-7-7-7H55V27c0-4-3-7-7-7z'/%3E%3C/svg%3E",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Ver Progresso",
+      "short_name": "Progresso",
+      "description": "Visualizar progresso nutricional",
+      "url": "/progress",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%2306b6d4' rx='12'/%3E%3Cpath fill='white' d='M48 20c-15 0-28 13-28 28s13 28 28 28 28-13 28-28-13-28-28-28zm0 10c10 0 18 8 18 18s-8 18-18 18-18-8-18-18 8-18 18-18z'/%3E%3C/svg%3E",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/import",
+      "accept": {
+        "text/csv": [".csv"],
+        "application/json": [".json"]
+      }
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

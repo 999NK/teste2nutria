@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, user-scalable=yes, viewport-fit=cover" />
+    <meta name="description" content="NutrIA - Seu assistente nutricional inteligente com reconhecimento de refeições por IA, acompanhamento de macronutrientes e metas personalizáveis." />
+    <meta name="keywords" content="nutrição, dieta, calorias, macronutrientes, IA, assistente nutricional, saúde" />
+    <meta name="author" content="NutrIA" />
+    <meta name="theme-color" content="#4CAF50" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="NutrIA - Assistente Nutricional Inteligente" />
+    <meta property="og:description" content="Acompanhe sua nutrição com IA, defina metas personalizadas e monitore seu progresso de forma inteligente." />
+    <meta property="og:image" content="/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="NutrIA - Assistente Nutricional Inteligente" />
+    <meta property="twitter:description" content="Acompanhe sua nutrição com IA, defina metas personalizadas e monitore seu progresso de forma inteligente." />
+    
+    <!-- PWA Configuration -->
+    <meta name="application-name" content="NutrIA" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="NutrIA" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" sizes="512x512" href="/icon-512.png" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous" />
+    
+    <!-- Prevent FOUC (Flash of Unstyled Content) -->
+    <style>
+      /* Minimal critical CSS to prevent layout shift */
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9fafb;
+        color: #111827;
+      }
+      
+      .dark body {
+        background-color: #111827;
+        color: #f9fafb;
+      }
+      
+      #root {
+        min-height: 100vh;
+      }
+      
+      /* Loading spinner */
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #4CAF50;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+    
+    <title>NutrIA - Assistente Nutricional Inteligente</title>
+    <!-- Force cache refresh - Updated 2025-06-28 -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="cache-bust" content="20250628-061600" />
+    <meta name="timestamp" content="1735355760000" />
+  </head>
+  <body>
+    <script>
+      // Force aggressive cache clearing
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          names.forEach(function(name) {
+            caches.delete(name);
+          });
+        });
+      }
+      
+      // Clear local storage selectively (keep auth)
+      const authKeys = ['darkMode'];
+      const toKeep = {};
+      authKeys.forEach(key => {
+        if (localStorage.getItem(key)) {
+          toKeep[key] = localStorage.getItem(key);
+        }
+      });
+      localStorage.clear();
+      sessionStorage.clear();
+      Object.keys(toKeep).forEach(key => {
+        localStorage.setItem(key, toKeep[key]);
+      });
+    </script>
+    <div id="root">
+      <!-- Loading fallback -->
+      <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column;">
+        <div style="width: 60px; height: 60px; background: #4CAF50; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+          <i class="fas fa-utensils" style="color: white; font-size: 24px;"></i>
+        </div>
+        <h1 style="font-size: 24px; font-weight: 700; color: #4CAF50; margin: 0 0 8px 0;">NutrIA</h1>
+        <p style="color: #6b7280; margin: 0 0 24px 0;">Carregando seu assistente nutricional...</p>
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+    
+    <script type="module" src="/src/main.tsx?v=20250628061600"></script>
+
+    
+    <!-- Service Worker Registration for PWA - Temporarily disabled for cache clearing -->
+    <script>
+      // First, unregister any existing service workers
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration of registrations) {
+            console.log('Unregistering SW:', registration);
+            registration.unregister();
+          }
+        });
+        
+        // Re-register after clearing cache
+        setTimeout(() => {
+          navigator.serviceWorker.register('/sw.js?v=20250628061600')
+            .then((registration) => {
+              console.log('SW re-registered: ', registration);
+              // Force update
+              registration.update();
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        }, 2000);
+      }
+    </script>
+    
+    <!-- Initialize dark mode before React loads -->
+    <script>
+      (function() {
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode === 'true' || (!savedDarkMode && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+    
+    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
+    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+  </body>
+</html>

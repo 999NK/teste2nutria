@@ -1,0 +1,100 @@
+Se a pesquisa está sempre retornando só “Ovo”, mesmo digitando outros alimentos como “arroz”, “banana”, etc., o problema pode estar em uma das etapas do fluxo. Vou listar os principais motivos possíveis divididos por etapa da aplicação — e como investigar cada um:
+
+✅ 1. A API /api/foods e /api/foods/search só retorna "Ovo"
+👉 Motivo possível: a API backend está filtrando incorretamente ou está limitada.
+
+O que testar:
+No navegador (ou via Insomnia/Postman), acesse manualmente:
+
+bash
+Copiar
+Editar
+/api/foods?search=arroz
+/api/foods/search?query=arroz
+Veja se realmente retorna apenas "Ovo" no JSON.
+
+Se sim, o problema está no backend.
+
+Verifique no backend:
+A lógica SQL (se for banco relacional) ou filtro (se for Firebase/Mongo/etc) da busca.
+
+Se o parâmetro de busca está sendo usado com LIKE ou equivalente.
+
+✅ 2. O frontend está sobrescrevendo o resultado
+👉 Motivo possível: o useQuery está sobrescrevendo os resultados, talvez por queryKey repetido ou erro no cache do React Query.
+
+O que testar:
+Adicione um console.log(debouncedQuery) e console.log(result) dentro da queryFn das duas queries (userFoods e usdaFoods).
+
+Veja se está chegando a query correta e se o resultado vem com alimentos variados, mas é ignorado ou filtrado depois.
+
+✅ 3. O debounce está atrasando a execução da busca
+👉 Motivo possível: o debouncedQuery só é atualizado depois de 500ms, então se você digita e aperta Enter logo depois, ele ainda não buscou.
+
+O que testar:
+Digite devagar e espere ~1 segundo após parar de digitar.
+
+Veja se os resultados mudam.
+
+Solução:
+Adicione um onKeyDown com Enter para forçar a busca:
+
+ts
+Copiar
+Editar
+onKeyDown={(e) => {
+  if (e.key === 'Enter') {
+    setDebouncedQuery(searchQuery);
+  }
+}}
+✅ 4. A condicional do enabled pode estar desativando a query
+👉 Motivo possível: o enabled da useQuery depende de debouncedQuery.trim().length > 2. Se você digitar só “ovo” (3 letras), funciona. Mas “arroz” pode ter erro de espaço ou caractere invisível.
+
+O que testar:
+Faça console.log([${debouncedQuery}]) para ver se está vindo com espaços extras.
+
+Tente digitar termos com certeza de mais de 3 letras.
+
+✅ 5. A query do frontend usa o campo errado para buscar
+👉 Motivo possível: o backend só busca por "name", e você está esperando buscar por "categoria" ou "marca".
+
+Verifique no backend:
+Ele está fazendo WHERE name LIKE '%query%'?
+
+Ou você quer que busque por qualquer campo (ex: marca, categoria)?
+
+✅ 6. Erro no retorno do backend e você está fazendo return [] silenciosamente
+No código você tem:
+
+ts
+Copiar
+Editar
+if (!response.ok) {
+  console.error(...);
+  return [];
+}
+Se o backend estiver retornando 500, ou mesmo um 200 com corpo malformado, vai cair nesse return [] sem erro visível (exceto no console).
+
+✅ 7. Apenas o "Ovo" existe nos seus dados
+Talvez o banco de dados (tanto o personalizado quanto o USDA) só tem “Ovo” inserido.
+
+O que fazer:
+Confirme que os dados estão lá mesmo (no banco ou via inspeção da API).
+
+Adicione alimentos manuais no banco para testar.
+
+✅ Teste final para isolar o problema:
+Faça esse teste direto no navegador:
+
+bash
+Copiar
+Editar
+http://localhost:3000/api/foods/search?query=arroz
+ou
+
+bash
+Copiar
+Editar
+http://localhost:3000/api/foods?search=arroz
+Veja o retorno bruto. Se o JSON tiver apenas "Ovo" mesmo digitando “arroz”, o backend está com problema.
+

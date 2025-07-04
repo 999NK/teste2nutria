@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Remove scrollbars globally */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(240, 10%, 3.9%);
+  --muted: hsl(240, 4.8%, 95.9%);
+  --muted-foreground: hsl(240, 3.7%, 15.9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 3.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 3.9%);
+  --border: hsl(240, 5.9%, 90%);
+  --input: hsl(240, 5.9%, 90%);
+  --primary: hsl(142, 71%, 45%);
+  --primary-foreground: hsl(355.7, 100%, 97.3%);
+  --secondary: hsl(240, 4.8%, 95.9%);
+  --secondary-foreground: hsl(240, 5.9%, 10%);
+  --accent: hsl(240, 4.8%, 95.9%);
+  --accent-foreground: hsl(240, 5.9%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(240, 5.9%, 10%);
+  --radius: 0.75rem;
+  --chart-1: hsl(142, 71%, 45%);
+  --chart-2: hsl(39, 84%, 56%);
+  --chart-3: hsl(27, 87%, 67%);
+  --chart-4: hsl(210, 82%, 63%);
+  --chart-5: hsl(269, 70%, 65%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 70%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(142, 71%, 45%);
+  --primary-foreground: hsl(355.7, 100%, 97.3%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --chart-1: hsl(142, 71%, 45%);
+  --chart-2: hsl(39, 84%, 56%);
+  --chart-3: hsl(27, 87%, 67%);
+  --chart-4: hsl(210, 82%, 63%);
+  --chart-5: hsl(269, 70%, 65%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Health/Nutrition themed colors */
+  .text-nutrition-green {
+    color: hsl(142, 71%, 45%);
+  }
+  
+  .bg-nutrition-green {
+    background-color: hsl(142, 71%, 45%);
+  }
+  
+  .text-protein-blue {
+    color: hsl(210, 82%, 63%);
+  }
+  
+  .bg-protein-blue {
+    background-color: hsl(210, 82%, 63%);
+  }
+  
+  .text-carbs-yellow {
+    color: hsl(39, 84%, 56%);
+  }
+  
+  .bg-carbs-yellow {
+    background-color: hsl(39, 84%, 56%);
+  }
+  
+  .text-fat-orange {
+    color: hsl(27, 87%, 67%);
+  }
+  
+  .bg-fat-orange {
+    background-color: hsl(27, 87%, 67%);
+  }
+
+  /* Custom scrollbar for dark mode */
+  .dark ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .dark ::-webkit-scrollbar-track {
+    background: hsl(240, 3.7%, 15.9%);
+  }
+  
+  .dark ::-webkit-scrollbar-thumb {
+    background: hsl(240, 5%, 64.9%);
+    border-radius: 3px;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: hsl(240, 5%, 74.9%);
+  }
+
+  /* Smooth transitions for theme switching */
+  * {
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  }
+
+  /* Focus styles for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* Mobile-first responsive typography */
+  h1 {
+    @apply text-2xl font-bold tracking-tight sm:text-3xl;
+  }
+
+  h2 {
+    @apply text-xl font-semibold tracking-tight sm:text-2xl;
+  }
+
+  h3 {
+    @apply text-lg font-semibold tracking-tight sm:text-xl;
+  }
+
+  /* Custom nutrition progress bars */
+  .nutrition-progress {
+    @apply w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden;
+  }
+
+  .nutrition-progress-fill {
+    @apply h-full transition-all duration-300 ease-in-out;
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-200 ease-in-out hover:shadow-md dark:hover:shadow-lg;
+  }
+
+  /* Button states */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 focus-ring;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 focus-ring;
+  }
+
+  /* Loading animations */
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Nutrition chart tooltips */
+  .recharts-tooltip-wrapper {
+    @apply drop-shadow-lg;
+  }
+
+  /* Mobile optimization */
+  @media (max-width: 640px) {
+    body {
+      @apply text-sm;
+    }
+    
+    .container {
+      @apply px-4;
+    }
+  }
+
+  /* Print styles for PDF export */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    
+    body {
+      @apply text-black bg-white;
+    }
+    
+    .print-page-break {
+      page-break-before: always;
+    }
+  }
+}
+
+/* FontAwesome icons compatibility */
+.fa, .fas, .far, .fal, .fab {
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands";
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  /* Nutrition-specific utilities */
+  .macro-protein {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+  
+  .macro-carbs {
+    @apply text-yellow-600 dark:text-yellow-400;
+  }
+  
+  .macro-fat {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+  
+  .macro-calories {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  /* Mobile-first responsive spacing */
+  .section-spacing {
+    @apply py-6 px-4 sm:py-8 sm:px-6;
+  }
+  
+  .card-spacing {
+    @apply p-4 sm:p-6;
+  }
+}

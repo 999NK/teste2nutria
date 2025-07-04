@@ -1,0 +1,96 @@
+✅ 1. Estrutura geral das buscas
+Você está usando react-query com fetch para buscar alimentos:
+
+GET /api/foods?search=... (alimentos personalizados do usuário)
+
+GET /api/foods/search?query=... (alimentos da base USDA)
+
+Ambos estão protegidos por:
+
+ts
+Copiar
+Editar
+enabled: !!debouncedQuery && debouncedQuery.trim().length > 2
+Isso está certo, mas:
+
+⚠️ 2. Possível falha: Requisições feitas com debouncedQuery antigo
+O debouncedQuery é atualizado após 500ms, mas o react-query já pode ter montado o queryKey antes disso. Isso pode gerar uma race condition leve, resultando em busca com um valor anterior ou até não disparar a busca.
+
+Solução sugerida:
+Mova debouncedQuery como parte do queryFn e não do queryKey, ou use enabled com mais rigidez para garantir sincronia.
+
+ts
+Copiar
+Editar
+queryKey: ["usda-foods", debouncedQuery],
+Essa prática melhora o cache e evita chamadas duplicadas com o mesmo termo anterior.
+
+⚠️ 3. Repetição de buscas desnecessárias
+Como staleTime e gcTime estão com valor 0, cada digitação (mesmo repetida) vai refazer a requisição. Isso pode sobrecarregar a API.
+
+Solução sugerida:
+Coloque um staleTime mínimo, tipo 30 * 1000 (30 segundos), ou controle com refetchOnWindowFocus: false.
+
+⚠️ 4. Não há tratamento de erro além do !response.ok
+O bloco:
+
+ts
+Copiar
+Editar
+if (!response.ok) {
+  console.error(...);
+  return [];
+}
+não cobre erros como:
+
+timeouts
+
+falha de conexão
+
+erro de rede
+
+JSON.parse inválido
+
+Solução sugerida:
+Envolver o fetch em try/catch:
+
+ts
+Copiar
+Editar
+try {
+  const res = await fetch(...);
+  if (!res.ok) throw new Error(`Erro ${res.status}`);
+  return await res.json();
+} catch (err) {
+  console.error("Erro ao buscar alimentos:", err);
+  return [];
+}
+⚠️ 5. Falta de fallback ao pressionar "Enter"
+Atualmente só há debounce com onChange. Se o usuário digitar rápido e apertar enter, a busca pode não disparar.
+
+Solução opcional:
+Adicione um onKeyDown no input para forçar o setDebouncedQuery(searchQuery) ao pressionar Enter.
+
+❓6. Verificação de query vazia na função e no enabled
+Você verifica !debouncedQuery || debouncedQuery.trim().length < 3 dentro da queryFn, e também em enabled. Isso é redundante.
+
+Solução sugerida:
+Deixe isso apenas em enabled (fora do queryFn). Se a função for chamada mesmo assim, significa que a condição de habilitação falhou.
+
+✅ 7. Log de debug
+Você está usando console.log para debugar o processo:
+
+ts
+Copiar
+Editar
+console.log('Searching user foods with query:', debouncedQuery);
+Isso é bom pra testes, mas pode ser removido na versão final ou ajustado para if (process.env.NODE_ENV !== 'production').
+
+✅ 8. Consulta usdaFoods e userFoods rodando em paralelo
+Isso é interessante, mas em alguns casos pode ser melhor otimizar para que uma só rode se a aba correspondente estiver visível (usando estado do TabsTrigger).
+
+✅ 9. Segurança na API
+A requisição usa credentials: "include", indicando cookies com HttpOnly. Está bom, só certifique-se de que o backend respeita isso corretamente com sessões.
+
+✅ 10. Validação no frontend
+A lógica para cálculo nutricional e unidades parece bem pensada.

@@ -1,0 +1,89 @@
+⚠️ 1. WebSocket inválido
+pgsql
+Copiar
+Editar
+Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=7g9SaLQnr1Rk' is invalid.
+👉 O que significa:
+Você está tentando abrir uma conexão WebSocket, mas a porta não foi definida (localhost:undefined).
+
+🎯 Causa provável:
+A URL do WebSocket foi construída com uma variável de ambiente (ou config) que não foi passada corretamente.
+
+✅ Solução:
+Verifica onde você monta a URL do WebSocket:
+
+ts
+Copiar
+Editar
+const socket = new WebSocket(`wss://localhost:${port}/?token=${token}`);
+Se port está undefined, precisa ajustar o .env, props ou default:
+
+ts
+Copiar
+Editar
+const port = process.env.WS_PORT || 5001;
+⚠️ 2. Banner de instalação PWA não exibido
+pgsql
+Copiar
+Editar
+Banner not shown: beforeinstallpromptevent.preventDefault() called.
+The page must call beforeinstallpromptevent.prompt() to show the banner.
+👉 O que significa:
+O navegador detectou que seu app é "instalável", mas você usou preventDefault() no evento beforeinstallprompt e nunca chamou prompt().
+
+✅ Solução:
+Se quiser que o banner apareça, use algo assim:
+
+ts
+Copiar
+Editar
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  // armazena o evento para usar depois
+  window.deferredPrompt = e;
+  e.prompt(); // isso mostra o banner
+});
+✅ 3. React DevTools aviso
+css
+Copiar
+Editar
+Download the React DevTools for a better development experience
+👉 O que significa:
+Só um aviso do React — se você ainda não tem o DevTools instalado no navegador, ele te recomenda.
+
+✅ Solução:
+Não precisa se preocupar. Só instale o React DevTools na Chrome Web Store se quiser.
+
+✅ 4. Query de parâmetros logada corretamente
+bash
+Copiar
+Editar
+Query parameters: Object
+Added param: date=2025-06-17
+Final URL: /api/meals?date=2025-06-17
+✅ Isso é só um console.log() — tá funcionando corretamente, mostrando os parâmetros passados na query para suas rotas /api/meals e /api/nutrition/daily.
+
+⚠️ 5. Erro 400 nas requisições de busca
+pgsql
+Copiar
+Editar
+api/foods/search:1 Failed to load resource: the server responded with a status of 400 (Bad Request)
+👉 O que significa:
+Você está fazendo chamadas para /api/foods/search, mas com uma query menor que 3 caracteres.
+
+✅ Solução:
+Antes de chamar o endpoint, certifique-se de que a busca tem no mínimo 3 letras:
+
+ts
+Copiar
+Editar
+if (search.length < 3) return;
+Isso evita que esse erro fique pipocando no console.
+
+✅ Conclusão geral
+Erro	O que fazer
+WebSocket undefined	Corrigir a construção da URL (verificar porta/token)
+Banner PWA	Chamar .prompt() após preventDefault()
+React DevTools	Aviso informativo, não precisa agir
+Query params	Tudo OK
+API /foods/search 400	Adicionar validação de mínimo 3 caracteres no front

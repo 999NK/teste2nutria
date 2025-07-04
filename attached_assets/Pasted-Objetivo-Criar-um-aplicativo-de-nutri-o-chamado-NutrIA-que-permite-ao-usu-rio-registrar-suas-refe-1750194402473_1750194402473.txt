@@ -1,0 +1,96 @@
+Objetivo: Criar um aplicativo de nutrição chamado NutrIA, que permite ao usuário registrar suas refeições diárias, acompanhar valores nutricionais e monitorar seu progresso em relação a metas personalizadas.
+
+Funcionalidades Principais:
+Cadastro e Perfil do Usuário:
+
+O usuário deve criar uma conta (login com e-mail/senha ou redes sociais).
+
+No perfil, ele deve definir:
+
+Objetivos (ex: perda de peso, ganho de massa muscular, manutenção).
+
+Metas diárias de calorias, proteínas, carboidratos e gorduras.
+
+Peso atual, altura e outras informações relevantes.
+
+Registro de Refeições:
+
+O usuário pode adicionar refeições (café da manhã, almoço, jantar, lanches).
+
+Para cada alimento, ele deve:
+
+Digitar o nome (com sugestões de banco de dados nutricional).
+
+Inserir a quantidade (em gramas, colheres, unidades, etc.).
+
+O app calcula automaticamente os valores nutricionais (kcal, proteínas, carboidratos, gorduras, fibras, etc.).
+
+Opção de salvar refeições favoritas para adicionar mais rápido depois.
+
+Calendário/Lista Diária:
+
+Visualização organizada das refeições por dia (tipo um diário alimentar).
+
+Ao final do dia, o app mostra:
+
+Total de calorias e macros consumidos.
+
+Comparação com as metas (ex: "Você consumiu 80% da sua proteína hoje").
+
+Alertas se excedeu ou ficou abaixo do planejado.
+
+Métricas e Gráficos:
+
+Página de estatísticas com gráficos para:
+
+Evolução diária/semanal/mensal de calorias e macros.
+
+Comparação entre metas x realizado.
+
+Gráficos de barras, linhas ou pizza para visualização intuitiva.
+
+Opção de exportar dados (PDF/Excel).
+
+Banco de Dados Nutricional:
+
+Integração com uma base de dados de alimentos (ex: TACO, USDA).
+
+Possibilidade de o usuário adicionar alimentos personalizados.
+
+Design e Experiência do Usuário (UX):
+
+Interface limpa e intuitiva, com cores relacionadas a saúde/nutrição.
+
+Notificações lembrando de registrar refeições (opcional).
+
+Dark mode e acessibilidade.
+
+Tecnologias Sugeridas (se aplicável):
+Firebase (autenticação e banco de dados).
+
+API de nutrição (ex: Nutritionix, Edamam).
+
+Flutter (para multiplataforma) ou Swift/Kotlin (nativo).
+
+Observações:
+
+O app deve funcionar offline (salvamento local).
+
+Priorizar segurança de dados do usuário.
+
+
+o aplicatrivo deve ser focado em celulares, deve ter como adicionar uma meta custumizada de proteinas, calorias, gordura e kcal, deve poder adicionar mais refeicoes, e deve ser uma area que irei adicionar a ia da deepseek para identificar frases e adicionar como refeicao, exemplo: comi pao 2 fatias de presunto e 2 ovos, ele adicinara usando uma media nutricional o pao as 2 fatis de presunto e os 2 ovos na conta diária
+
+adicione tambem a funcao de tipo de refeicao personalizado, onde a pessoa vai escrever manualmente o que ela comeu, quantidade e valor nutricional do item, exemplo: comi bolacha danix, 4 unidades, 10 proteina 140 carbo 300kcal. e nesse adicionar refeicao coloque tambem uma forma de escolher a quantidade, em gramas, colheres, xicaras e todo metodo de medida. use uma base de media de quantas g tem uma xicara, colher e outros metodos de medida.
+
+construa tambem a pagina de refeicoes e de progresso. e no perfil adicione uma forma de alterar a meta nutrucional para uma personalizada pelo usuario. em progresso crie uma forma de exportar os dados diarios, semanais ou mensais em pdf, sistema de notificacao, as 20h da noite o aplicativo envia o progresso diario e diz quanto falta de nutrientes, ou quanto passou no dia pro usuário
+
+adicione umas uma aba de Meus alimentos
+
+nessa aba o usuario pode adicionar receitas, ou cadastrar alimentos que ele tem disponivel e o app utilizando vai oferecer receitas mostrando seu nivel de nutrientes. botao de salvar receitas, e de atualizar receitas.
+
+no codigo, em todos as funcionalidades de ia deixe demarcado onde vai colocar o apikey pra que a ia responda.
+
+corrija as informacoes fisicas, onde o peso fica salvo com um 0 no inicio formando 610 no meu caso, em vez de 61 e nas metas diarias do perfil coloque o metodo de personalizar esses valores de nutrientes diarios
+
+o exportar pdf ta vindo como txt, transforme em pdf e crie um pdf costumizavel e bonito para exibir as informacoes exportadas

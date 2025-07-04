@@ -1,0 +1,65 @@
+client:536 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=7g9SaLQnr1Rk' is invalid.
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)Understand this error
+chunk-RPCDYKBN.js?v=4db44aae:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+VM35:6 SW registered:  ServiceWorkerRegistration
+ef025225-635e-46e7-b4d3-a0202f3fe698-00-svbria500cbm.janeway.replit.dev/:1 Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.
+queryClient.ts:39 Query parameters: Object
+queryClient.ts:44 Added param: date=2025-06-17
+queryClient.ts:50 Final URL: /api/meals?date=2025-06-17
+queryClient.ts:39 Query parameters: Object
+queryClient.ts:44 Added param: date=2025-06-17
+queryClient.ts:50 Final URL: /api/nutrition/daily?date=2025-06-17
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)Understand this error
+api/foods/search:1 
+            
+            
+           Failed to load resource: the server responded with a status of 400 (Bad Request)

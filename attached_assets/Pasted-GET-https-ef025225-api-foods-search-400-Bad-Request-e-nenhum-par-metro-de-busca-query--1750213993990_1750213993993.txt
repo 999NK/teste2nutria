@@ -1,0 +1,79 @@
+GET https://ef025225-.../api/foods/search 400 (Bad Request)
+...e nenhum parâmetro de busca (?query=...) na URL, o problema está confirmado: a requisição está sendo feita sem o parâmetro query, e o backend retorna erro 400 corretamente.
+
+✅ O que está acontecendo?
+No seu código:
+
+ts
+Copiar
+Editar
+const response = await fetch(`/api/foods/search?query=${encodeURIComponent(debouncedQuery.trim())}`)
+Se debouncedQuery estiver vazio, undefined ou só com espaços, isso gera uma URL assim:
+
+bash
+Copiar
+Editar
+/api/foods/search?query=
+E o servidor (corretamente) responde com erro 400 - Bad Request.
+
+✅ Como resolver de forma simples
+🔧 1. Reforce a verificação dentro do queryFn (independente do enabled):
+ts
+Copiar
+Editar
+queryFn: async () => {
+  const query = debouncedQuery.trim();
+  if (!query || query.length < 3) return [];
+
+  const url = `/api/foods/search?query=${encodeURIComponent(query)}`;
+  console.log("🔍 URL gerada:", url);
+
+  const response = await fetch(url, {
+    credentials: "include"
+  });
+
+  if (!response.ok) {
+    console.error("Erro ao buscar alimentos:", response.status, response.statusText);
+    return [];
+  }
+
+  return await response.json();
+}
+✅ 2. Confirme que o debouncedQuery está recebendo valor corretamente:
+Você pode adicionar um log no useEffect:
+
+ts
+Copiar
+Editar
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setDebouncedQuery(searchQuery);
+    console.log("🕐 Debounced query atualizada:", searchQuery);
+  }, 500);
+  return () => clearTimeout(timer);
+}, [searchQuery]);
+💡 Bônus – Teste de digitação rápida com ENTER
+Caso esteja apertando Enter logo após digitar, o debounce ainda não atualizou debouncedQuery.
+
+Solução: forçar a atualização no Enter:
+
+tsx
+Copiar
+Editar
+<Input
+  value={searchQuery}
+  onChange={(e) => setSearchQuery(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") setDebouncedQuery(searchQuery);
+  }}
+  placeholder="Busque por alimentos"
+  className="pl-10"
+/>
+✅ Conclusão
+O erro 400 está acontecendo porque a URL é chamada sem o parâmetro query preenchido.
+
+Isso vem de um debouncedQuery vazio ou não sincronizado.
+
+Corrigir com validação dentro do queryFn e log de controle resolve completamente.
+
+O resto dos erros (WebSocket, banner PWA) não têm relação direta com isso e podem ser ignorados no momento.

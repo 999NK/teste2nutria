@@ -1,0 +1,66 @@
+Sua interface já está visualmente organizada, mas há várias formas de aprimorar a experiência do usuário (UX), tomando como base apps populares como MyFitnessPal, Nike Training Club, Freeletics e Fitbit. Aqui vão sugestões práticas para melhorar a UX das páginas do "Meu Plano":
+
+🔁 1. Unificação de Planos em Cards Inteligentes (visão geral)
+Atualmente, os planos aparecem em telas separadas (nutricional e treino). Inspirado no Freeletics e Nike App, use cards colapsáveis lado a lado ou em tabs para permitir:
+
+Trocar rapidamente entre planos.
+
+Ver planos ativos e arquivados com facilidade.
+
+Destaques visuais (ex: borda verde = ativo, cinza = arquivado).
+
+Sugestão visual:
+
+plaintext
+Copiar
+Editar
+| Treino: Push Pull Legs [ativo]      | Nutrição: Low Carb [desativado]    |
+| ⬇ Ver Detalhes                      | ⬇ Ver Detalhes                     |
+✏️ 2. Editor Rápido Inline (Edição Sem Sair da Tela)
+Atualmente é necessário navegar ou clicar em botões separados para editar plano ou perfil. Use edição inline:
+
+Clique em peso, altura ou objetivo e edite diretamente ali (como no MyFitnessPal).
+
+Alterações salvas em tempo real (auto-save ou botão flutuante de “Salvar”).
+
+📊 3. Feedback Visual Diário Agradável
+O quadro de “Progresso Diário” é funcional, mas pode ser:
+
+Mais visual: barras ou ícones animados que mostram progresso (como no Fitbit ou LoseIt!).
+
+Melhor usar escala progressiva: ex. “Você completou 60% da dieta hoje”.
+
+Mostrar conquistas: “3 dias seguidos mantendo plano alimentar! 🎉”.
+
+🧭 4. Guia Inicial ou Tour Interativo
+Como o app tem várias áreas (treino, nutrição, progresso), um tour orientado (estilo onboarding do Headspace) pode mostrar:
+
+Como ativar um plano.
+
+Como adicionar refeições.
+
+Como verificar progresso.
+
+📅 5. Integração Visual com Cronograma (Calendário)
+Hoje o “Cronograma de Treinos” parece um painel estático. Considere:
+
+Exibir os dias em um calendário real, com ícones de treino ou descanso.
+
+Estilo Nike Training Club: toque no dia e veja o plano completo com tempo estimado, grupo muscular e instruções.
+
+📦 6. Cards de Plano com Status e Ações
+O botão “Ativar” e “Excluir” poderia ser substituído por:
+
+Botões ícones pequenos com tooltips.
+
+Estado mais claro: ✅ Ativo | 💤 Inativo.
+
+Estilo Notion com botões “⋯” para editar, duplicar, renomear plano.
+
+📈 7. Conexão Entre Planos e Progresso
+Hoje, plano e progresso parecem desconectados. Torne-os mais coesos:
+
+Ao clicar em um plano, mostrar quanto de progresso ele tem.
+
+Ex: “Você completou 8/12 treinos deste plano” ou “Dieta seguida por 4 dias seguidos”.
+
