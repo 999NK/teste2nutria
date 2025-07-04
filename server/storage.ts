@@ -32,7 +32,7 @@ import {
   type InsertUserPlan,
   type DailyProgress,
   type InsertDailyProgress,
-} from "@shared/schema";
+} from "@shared/schema_sqlite";
 import { db } from "./db";
 import { eq, and, desc, sql, gte, lte, or, isNull, ne } from "drizzle-orm";
 

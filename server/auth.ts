@@ -5,7 +5,7 @@ import { Express } from "express";
 import session from "express-session";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
-import { storage } from "./storage_simple";
+import { storage } from "./storage_temp";
 import { User as SelectUser } from "@shared/schema";
 import connectPg from "connect-pg-simple";
 
@@ -52,13 +52,8 @@ async function comparePasswords(supplied: string, stored: string) {
 
 export function setupAuth(app: Express) {
   // Session configuration
-  const pgStore = connectPg(session);
-  const sessionStore = new pgStore({
-    conString: process.env.DATABASE_URL,
-    createTableIfMissing: false,
-    ttl: 7 * 24 * 60 * 60, // 1 week in seconds
-    tableName: "sessions",
-  });
+  // Using memory store from storage_temp for temporary compatibility
+  const sessionStore = storage.sessionStore;
 
   const sessionSettings: session.SessionOptions = {
     secret: process.env.SESSION_SECRET!,

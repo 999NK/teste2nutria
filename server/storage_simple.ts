@@ -1,14 +1,13 @@
 import { db } from "./db";
-import { users, foods, meals, mealTypes, recipes, dailyNutrition, mealPlans } from "@shared/schema";
-import { eq, desc, and, or, isNull, ilike, sql } from "drizzle-orm";
+import { users, foods, meals, mealTypes, recipes, dailyNutrition, mealPlans } from "@shared/schema_sqlite";
+import { eq, desc, and, or, isNull, like, sql } from "drizzle-orm";
 import type { 
   User, UpsertUser, Food, InsertFood
-} from "@shared/schema";
+} from "@shared/schema_sqlite";
 import session from "express-session";
-import connectPg from "connect-pg-simple";
-import { pool } from "./db";
+import MemoryStore from "memorystore";
 
-const PostgresSessionStore = connectPg(session);
+const MemorySessionStore = MemoryStore(session);
 
 export interface IStorage {
   // User operations
@@ -45,9 +44,8 @@ export class DatabaseStorage implements IStorage {
   sessionStore: any;
 
   constructor() {
-    this.sessionStore = new PostgresSessionStore({ 
-      pool, 
-      createTableIfMissing: true 
+    this.sessionStore = new MemorySessionStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
     });
   }
 
